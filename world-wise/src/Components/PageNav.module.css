@@ -1,7 +1,10 @@
 .nav {
-  background-color: #222; /* Dark background for a modern look */
+  margin-top: -19px;
+  display: flex; /* Enables flexbox */
+  align-items: center; /* Aligns items vertically */
+  justify-content: space-between; /* Moves logo left, links right */
+  background-color: none; /* Dark background for a modern look */
   padding: 15px 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .nav ul {
