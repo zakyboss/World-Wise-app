@@ -24,3 +24,9 @@
   flex-direction: column;
   gap: 0.5rem;
 }
+.btn {
+  padding: 8px;
+  border-radius: 8px;
+  color: purple;
+  background-color: rgb(68, 241, 126);
+}

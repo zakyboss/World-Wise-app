@@ -34,7 +34,7 @@ export default function Login() {
 
         <div>
           <Link to="/app">
-            <button>Login</button>{" "}
+            <button className={styles.btn}>Login</button>{" "}
           </Link>
         </div>
       </form>
