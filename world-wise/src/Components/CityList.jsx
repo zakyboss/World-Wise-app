@@ -3,7 +3,9 @@ import styles from "./CityList.module.css";
 import Spinner from "./Spinner";
 import CityItem from "./CityItem";
 import Message from "./Message";
-export default function CityList({ cities, isLoading }) {
+import { useCities } from "../contexts/CitiesContext";
+export default function CityList() {
+  const { cities, isLoading } = useCities();
   return (
     <>
       {isLoading && <Spinner />}
@@ -12,7 +14,7 @@ export default function CityList({ cities, isLoading }) {
       )}
       <ul className={styles.cityList}>
         {cities.map((city) => (
-          <CityItem item={city} key={city.cityName} />
+          <CityItem item={city} key={city.cityName}  />
         ))}
       </ul>
       ;
