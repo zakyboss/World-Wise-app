@@ -5,6 +5,7 @@ import { useState } from "react";
 import styles from "./Form.module.css";
 import Button from "./Button";
 import ButtonBack from "./ButtonBack";
+import { useCities } from "../contexts/CitiesContext";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -15,6 +16,7 @@ export function convertToEmoji(countryCode) {
 }
 
 function Form() {
+  const { currentCity } = useCities();
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
   const [date, setDate] = useState(new Date());
@@ -26,13 +28,13 @@ function Form() {
         <input
           id="cityName"
           onChange={(e) => setCityName(e.target.value)}
-          value={cityName}
+          value={currentCity.cityName}
         />
         {/* <span className={styles.flag}>{emoji}</span> */}
       </div>
 
       <div className={styles.row}>
-        <label htmlFor="date">When did you go to {cityName}?</label>
+        <label htmlFor="date">When did you go to {currentCity.cityName}?</label>
         <input
           id="date"
           onChange={(e) => setDate(e.target.value)}
