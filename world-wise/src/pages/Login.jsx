@@ -1,13 +1,24 @@
 import styles from "./Login.module.css";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import PageNav from "../Components/PageNav";
+import { useAuthContext } from "../contexts/FakeAuthContext";
 
 export default function Login() {
   // PRE-FILL FOR DEV PURPOSES
   const [email, setEmail] = useState("jack@example.com");
   const [password, setPassword] = useState("qwerty");
-
+  // 2) In the `Login.jsx` page, call `login()` from context
+  const { login, isAuthenticated } = useAuthContext();
+  const navigate = useNavigate();
+  useEffect(
+    function () {
+      if (isAuthenticated) {
+        navigate("/app", { replace: true });
+      }
+    },
+    [isAuthenticated, navigate]
+  );
   return (
     <main className={styles.login}>
       <PageNav />
@@ -34,7 +45,12 @@ export default function Login() {
 
         <div>
           <Link to="/app">
-            <button className={styles.btn}>Login</button>{" "}
+            <button
+              className={styles.btn}
+              onClick={() => login(email, password)}
+            >
+              Login
+            </button>{" "}
           </Link>
         </div>
       </form>

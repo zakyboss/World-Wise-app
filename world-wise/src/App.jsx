@@ -11,30 +11,43 @@ import { CitiesProvider } from "./contexts/CitiesContext";
 import CountriesList from "./Components/CountriesList";
 import City from "./Components/City";
 import Form from "./Components/Form";
+import { AuthContextProvider } from "./contexts/FakeAuthContext";
+import ProtectedRoute from "./pages/ProtectedRoute";
 export default function App() {
+  // 1) Add `AuthProvider` to `App.jsx`
+
   return (
     <div>
-      <CitiesProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="pricing" element={<Pricing />} />
-            <Route path="product" element={<Product />} />
-            <Route path="login" element={<Login />} />
-            <Route path="*" element={<PageNotFound />} />
+      <AuthContextProvider>
+        <CitiesProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="pricing" element={<Pricing />} />
+              <Route path="product" element={<Product />} />
+              <Route path="login" element={<Login />} />
+              <Route path="*" element={<PageNotFound />} />
 
-            {/* Define "app" as the parent route */}
-            <Route path="app" element={<AppLayout />}>
-              <Route index element={<Navigate replace to="cities" />} />
-              <Route path="cities" element={<CityList />} />
-              <Route path="cities/:id" element={<City />} />
-              <Route path="countries" element={<CountriesList />} />
+              {/* Define "app" as the parent route */}
+              <Route
+                path="app"
+                element={
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route index element={<Navigate replace to="cities" />} />
+                <Route path="cities" element={<CityList />} />
+                <Route path="cities/:id" element={<City />} />
+                <Route path="countries" element={<CountriesList />} />
 
-              <Route path="form" element={<Form />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </CitiesProvider>
+                <Route path="form" element={<Form />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </CitiesProvider>
+      </AuthContextProvider>
     </div>
   );
 }
