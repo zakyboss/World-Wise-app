@@ -14,14 +14,14 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function City() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { id } = useParams();
   const { getCity, currentCity, isLoading } = useCities();
   useEffect(
     function () {
       getCity(id);
     },
-    [id]
+    [id, getCity]
   );
   const { cityName, emoji, date, notes } = currentCity;
 
