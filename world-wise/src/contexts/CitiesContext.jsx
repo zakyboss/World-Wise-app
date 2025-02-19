@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useCallback,
+} from "react";
 
 const CitiesContext = createContext();
 function reducer(state, action) {
@@ -43,7 +49,7 @@ function CitiesProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initalState);
   const { cities, isLoading, currentCity } = state;
   useEffect(() => {
-    async function getCities() {
+    const getCities = async function getCities() {
       try {
         dispatch({ type: "loading" });
         const res = await fetch("http://localhost:8000/cities");
@@ -60,35 +66,38 @@ function CitiesProvider({ children }) {
           payload: "There was am error fetching the cities ",
         });
       }
-    }
+    };
 
     getCities();
   }, []);
 
-  async function getCity(id) {
-    if (Number(id) === currentCity.id) {
-      return;
-    }
-    try {
-      dispatch({ type: "loading" });
-      const res = await fetch(`http://localhost:8000/cities/${id}`);
-
-      if (!res.ok) {
-        throw new Error(`Server Error: ${res.status} ${res.statusText}`);
+  const getCity = useCallback(
+    async function getCity(id) {
+      if (Number(id) === currentCity.id) {
+        return;
       }
+      try {
+        dispatch({ type: "loading" });
+        const res = await fetch(`http://localhost:8000/cities/${id}`);
 
-      const data = await res.json();
+        if (!res.ok) {
+          throw new Error(`Server Error: ${res.status} ${res.statusText}`);
+        }
 
-      // setCurrentCity(data);
-      dispatch({ type: "city/loaded", payload: data });
-    } catch (err) {
-      dispatch({
-        type: "rejected",
-        payload: "There was am error fetching the city ",
-      });
-    } finally {
-    }
-  }
+        const data = await res.json();
+
+        // setCurrentCity(data);
+        dispatch({ type: "city/loaded", payload: data });
+      } catch (err) {
+        dispatch({
+          type: "rejected",
+          payload: "There was am error fetching the city ",
+        });
+      } finally {
+      }
+    },
+    [currentCity.id]
+  );
   async function addCity(newCity) {
     if (!newCity) return;
 
