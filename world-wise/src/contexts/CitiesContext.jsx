@@ -138,6 +138,12 @@ function CitiesProvider({ children }) {
     }
   }
   async function deleteCity(id) {
+    let userInput = window.prompt("Type 'OK' to accept:");
+
+    if (!userInput === "OK") {
+      console.log("User rejected to delete city !");
+      return;
+    }
     try {
       dispatch({ type: "loading" });
       const res = await fetch(`http://localhost:8000/cities/${id}`, {

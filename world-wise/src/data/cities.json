@@ -47,42 +47,6 @@
         "lng": "-2.13128394200588"
       },
       "id": "98443198"
-    },
-    {
-      "id": "6a6d",
-      "cityName": "Teruel",
-      "country": "Spain",
-      "emoji": "🇪🇸",
-      "date": "2025-02-16T08:28:47.281Z",
-      "position": {
-        "lat": "40.37584377696013",
-        "lng": "-0.9887695312500001"
-      },
-      "notes": "Awesome"
-    },
-    {
-      "id": "b10c",
-      "cityName": "Talayuelas",
-      "country": "Spain",
-      "emoji": "🇪🇸",
-      "date": "2025-02-19T00:39:18.229Z",
-      "position": {
-        "lat": "39.80853604144591",
-        "lng": "-1.2414550781250002"
-      },
-      "notes": "Awesome"
-    },
-    {
-      "id": "1520",
-      "cityName": "Mombasa",
-      "country": "Kenya",
-      "emoji": "🇰🇪",
-      "date": "2025-02-19T00:39:52.361Z",
-      "position": {
-        "lat": "-4.034138291548425",
-        "lng": "39.64416503906251"
-      },
-      "notes": "Amazing"
     }
   ]
 }
